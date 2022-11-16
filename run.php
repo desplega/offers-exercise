@@ -2,6 +2,9 @@
 
 require 'vendor/autoload.php';
 
+ini_set('log_errors', 1); // Just in case it is not set in php.ini
+ini_set('error_log', 'error.log');
+
 use CodeChallenge\JSONReader;
 use CodeChallenge\Command;
 
@@ -32,5 +35,10 @@ $reader = new JSONReader();
 $offers = $reader->read($data);
 
 $command = new Command($offers);
-echo $command->run($argv);
+
+try {
+    echo $command->run($argv);
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+}
 
