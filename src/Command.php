@@ -13,6 +13,7 @@ class Command
 
     public function run($params): ?int
     {
+        $error = 'Non valid command: ' . $params[1];
         if (count($params) > 1) {
             switch ($params[1]) {
                 case 'count_by_price_range':
@@ -20,8 +21,6 @@ class Command
                         return $this->countByPriceRange((float) $params[2], (float) $params[3]);
                     } else {
                         $error = 'Missing parameters: price_low and price_high are required';
-                        error_log($error);
-                        throw new \Exception($error);
                     }
                     break;
                 case 'count_by_vendor':
@@ -29,14 +28,13 @@ class Command
                         return $this->countByVendor((int) $params[2]);
                     } else {
                         $error = 'Missing parameters: vendor_id is required';
-                        error_log($error);
-                        throw new \Exception($error);
                     }
                     break;
             }
+        } else {
+            $error = 'Missing command';
         }
 
-        $error = 'Non valid command: ' . $params[1];
         error_log($error);
         throw new \Exception($error);
 
