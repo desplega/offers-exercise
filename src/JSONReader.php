@@ -11,12 +11,7 @@ class JSONReader implements ReaderInterface
     {
         // Convert from JSON to Array of stdClass objects
         $offers = json_decode($input);
-        $offersArray = [];
 
-        foreach ($offers as $offer) {
-            $offersArray[] = new Offer($offer);
-        }
-
-        return new OfferCollection($offersArray);
+        return new OfferCollection($offers);
     }
 }

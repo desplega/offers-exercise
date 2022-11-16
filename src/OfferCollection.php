@@ -7,11 +7,15 @@ use CodeChallenge\Interfaces\OfferInterface;
 
 class OfferCollection implements OfferCollectionInterface
 {
-    protected $offers = [];
+    private $offers = [];
 
     public function __construct(array $offers)
     {
-        $this->offers = $offers;
+        $this->offers = [];
+
+        foreach ($offers as $offer) {
+            $this->offers[] = new Offer($offer);
+        }
     }
 
     public function count()
@@ -26,8 +30,6 @@ class OfferCollection implements OfferCollectionInterface
 
     public function getIterator(): \Iterator
     {
-        $arrayObject = new \ArrayObject($this->offers);
-
-        return $arrayObject->getIterator();
+        return new \ArrayIterator($this->offers);
     }
 }
