@@ -1,0 +1,16 @@
+{
+    "require": {
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeChallenge\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodeChallenge\\Test\\": "tests/"
+        }
+    }
+}
